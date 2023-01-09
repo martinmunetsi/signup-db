@@ -1,3 +1,5 @@
+DROP TABLE IF EXISTS pswd_hist, pswd, users CASCADE;
+
 CREATE TABLE users
 (
     user_id      varchar(30) PRIMARY KEY,
@@ -9,7 +11,8 @@ CREATE TABLE users
 
 CREATE TABLE pswd
 (
-    user_id            varchar(30)   NOT NULL REFERENCES users (user_id) UNIQUE,
+    id            SERIAL PRIMARY KEY,
+	user_id            varchar(30)   NOT NULL REFERENCES users (user_id) UNIQUE,
     pswd_hash          varchar(500),
     created_date       date          NOT NULL,
     locked             boolean       NOT NULL	
@@ -17,7 +20,7 @@ CREATE TABLE pswd
 
 CREATE TABLE pswd_hist
 (
-	pswd_hist_id       SERIAL PRIMARY KEY,
+	id       SERIAL PRIMARY KEY,
 	user_id            varchar(30)   NOT NULL REFERENCES users (user_id),
     pswd_hash          varchar(500),
     created_date       date          NOT NULL	
